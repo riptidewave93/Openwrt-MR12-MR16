@@ -1,7 +1,7 @@
 Openwrt-MR12
 ============
 
-Bringup Repo for the MR12 on the latest OpenWRT Nightlies
+Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies
 
 
 About
@@ -10,7 +10,7 @@ Based on OpenWRT CHAOS CALMER r42419. May or may not work on newer revisions.
 
 Building
 --------
-git sync, apply patches, menuconfig && kernel_menuconfig, build, and enjoy
+git sync, apply patch or copy files, menuconfig && kernel_menuconfig, build, and enjoy
 
 Booting
 -------
