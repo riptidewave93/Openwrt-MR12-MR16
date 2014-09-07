@@ -6,11 +6,11 @@ Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r42419. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r42429. May or may not work on newer revisions.
 
 Building
 --------
-git sync, apply patch or copy files, menuconfig && kernel_menuconfig, build, and enjoy
+git sync, copy files on top of build dir, menuconfig && kernel_menuconfig, build, and enjoy
 
 Booting
 -------
@@ -18,8 +18,9 @@ tftpboot 0x81000000 openwrt-ar71xx-generic-mr12-initramfs-uImage.bin; bootm
 
 To Do
 -----
-* Bring up the 2nd NIC (No clue if it's an issue with the PHY, or other?)
-* Bring up the Wi-Fi
+* Bring up the 2nd NIC (Missing PHY?)
+* Bring up the Wi-Fi (PCI init issue?)
+* Use Proper NIC MAC Addresses
 * Fix Reset button GPIO
 * enable sysupgrade
 * Possibly more?

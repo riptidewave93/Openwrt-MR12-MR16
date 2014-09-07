@@ -5,7 +5,7 @@
  	select ATH79_DEV_WMAC
  
 +config ATH79_MACH_MR12
-+	bool "Cisco Meraki MR12 board support"
++	bool "Meraki MR12 board support"
 +	select SOC_AR724X
 +	select ATH79_DEV_AP9X_PCI if PCI
 +	select ATH79_DEV_ETH

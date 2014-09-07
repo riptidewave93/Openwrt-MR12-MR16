@@ -6,7 +6,7 @@
 #
 
 define Profile/MR12
-	NAME:=Cisco Meraki MR12
+	NAME:=Meraki MR12
 	PACKAGES:=kmod-spi-gpio
 endef
 
@@ -15,4 +15,3 @@ define Profile/MR12/description
 endef
 
 $(eval $(call Profile,MR12))
-

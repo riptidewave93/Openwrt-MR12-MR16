@@ -27,6 +27,8 @@
 #include "dev-m25p80.h"
 #include "machtypes.h"
 #include "dev-wmac.h"
+#include "pci.h"
+
 
 /* Wi-Fi Signal LED's */
 #define MR12_GPIO_LED_W4_GREEN		11
@@ -42,17 +44,13 @@
 #define MR12_GPIO_LED_POWER_GREEN		17
 
 /* Reset button */
-#define MR12_GPIO_BTN_RESET		1 //not correct, find right GPIO
-
+#define MR12_GPIO_BTN_RESET		1   // not correct
 #define MR12_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR12_KEYS_DEBOUNCE_INTERVAL	(3 * MR12_KEYS_POLL_INTERVAL)
 
-
-// all of these needs to be checked/validated
-#define MR12_WMAC0_MAC_OFFSET		0x120c
-#define MR12_WMAC1_MAC_OFFSET		0x520c
-#define MR12_CALDATA0_OFFSET		0x1000
-#define MR12_CALDATA1_OFFSET		0x5000
+/* NIC info */
+#define MR12_WAN_PHYMASK    BIT(4)
+#define MR12_LAN_PHYMASK    BIT(5) // not correct
 
 /*
  * MR12 has 7 LED's on the front. 14-11 are for the Wi-Fi reception,
@@ -101,12 +99,9 @@ static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 	}
 };
 
-#define MR12_WAN_PHYMASK BIT(4)
-#define MR12_LAN_PHYMASK BIT(5) // Probably not right
-
 static void __init MR12_setup(void)
 {
-	u8 *art = (u8 *) KSEG1ADDR(0x1fff0000); // This gives us a warning
+    u8 *art = (u8 *) KSEG1ADDR(0x1fff0000); // not correct, does not give proper MAC
 
     ath79_register_mdio(0, ~(MR12_WAN_PHYMASK | MR12_LAN_PHYMASK));
 
@@ -116,15 +111,15 @@ static void __init MR12_setup(void)
 	ath79_eth0_data.speed = SPEED_1000;
 	ath79_eth0_data.duplex = DUPLEX_FULL;
 
-	ath79_register_eth(0);
-
 	ath79_init_mac(ath79_eth1_data.mac_addr, art, 1);
-	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
+	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
 	ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK;
+	ath79_eth1_data.speed = SPEED_100;
+	ath79_eth1_data.duplex = DUPLEX_FULL;
 
-	ath79_eth1_pll_data.pll_1000 = 0x1f000000; // is this needed for us?
-
+   	ath79_register_eth(0);
 	ath79_register_eth(1);
+
 	ath79_register_m25p80(NULL);
 
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR12_leds_gpio),
@@ -134,10 +129,7 @@ static void __init MR12_setup(void)
 					 ARRAY_SIZE(MR12_gpio_keys),
 					 MR12_gpio_keys);
 
-	 ap94_pci_init(art + MR12_CALDATA0_OFFSET,
-		      art + MR12_WMAC0_MAC_OFFSET,
-		      art + MR12_CALDATA1_OFFSET,
-		      art + MR12_WMAC1_MAC_OFFSET);
+    ath79_register_pci();
 }
 
 MIPS_MACHINE(ATH79_MACH_MR12, "MR12", "Meraki MR12", MR12_setup);
