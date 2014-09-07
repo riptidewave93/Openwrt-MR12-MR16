@@ -20,15 +20,12 @@
 #include <asm/mach-ath79/ar71xx_regs.h>
 #include <asm/mach-ath79/ath79.h>
 
-#include "dev-ap9x-pci.h"
 #include "dev-eth.h"
+#include "dev-ap9x-pci.h"
 #include "dev-gpio-buttons.h"
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
 #include "machtypes.h"
-#include "dev-wmac.h"
-#include "pci.h"
-
 
 /* Wi-Fi Signal LED's */
 #define MR12_GPIO_LED_W4_GREEN		11
@@ -57,6 +54,22 @@
  * 15 for a WAN link, and 16-17 for the power LED (orange and green) 
  */
 static struct gpio_led MR12_leds_gpio[] __initdata = {
+    {
+		.name		= "mr12:green:wan",
+		.gpio		= MR12_GPIO_LED_WAN,
+		.active_low	= 1,
+	}, {
+		.name		= "mr12:orange:power",
+		.gpio		= MR12_GPIO_LED_POWER_ORANGE,
+		.active_low	= 1,
+	}, {
+		.name		= "mr12:green:power",
+		.gpio		= MR12_GPIO_LED_POWER_GREEN,
+		.active_low	= 1,
+	} 
+};
+
+static struct gpio_led MR12_wmac_leds_gpio[] = {
 	{
 		.name		= "mr12:green:wifi4",
 		.gpio		= MR12_GPIO_LED_W4_GREEN,
@@ -73,19 +86,7 @@ static struct gpio_led MR12_leds_gpio[] __initdata = {
 		.name		= "mr12:green:wifi1",
 		.gpio		= MR12_GPIO_LED_W1_GREEN,
 		.active_low	= 1,
-	}, {
-		.name		= "mr12:green:wan",
-		.gpio		= MR12_GPIO_LED_WAN,
-		.active_low	= 1,
-	}, {
-		.name		= "mr12:orange:power",
-		.gpio		= MR12_GPIO_LED_POWER_ORANGE,
-		.active_low	= 1,
-	}, {
-		.name		= "mr12:green:power",
-		.gpio		= MR12_GPIO_LED_POWER_GREEN,
-		.active_low	= 1,
-	} 
+	}
 };
 
 static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
@@ -101,35 +102,43 @@ static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 
 static void __init MR12_setup(void)
 {
+    u8 *mac = (u8 *) KSEG1ADDR(0x18000000); // not correct, does not find WLAN
     u8 *art = (u8 *) KSEG1ADDR(0x1fff0000); // not correct, does not give proper MAC
 
+    /* Bring up MDIO */ 
     ath79_register_mdio(0, ~(MR12_WAN_PHYMASK | MR12_LAN_PHYMASK));
 
+    /* 1GB POE Port */
 	ath79_init_mac(ath79_eth0_data.mac_addr, art, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
-	ath79_eth0_data.speed = SPEED_1000;
-	ath79_eth0_data.duplex = DUPLEX_FULL;
 
+    /* 100MB Opt Port */
 	ath79_init_mac(ath79_eth1_data.mac_addr, art, 1);
 	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
-	ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK;
+	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed
 	ath79_eth1_data.speed = SPEED_100;
 	ath79_eth1_data.duplex = DUPLEX_FULL;
 
+    /* Bringup eth int's */
    	ath79_register_eth(0);
 	ath79_register_eth(1);
 
+    /* Wi-Fi Int */
+	ap9x_pci_setup_wmac_led_pin(0, MR12_GPIO_LED_W1_GREEN);
+	ap9x_pci_setup_wmac_leds(0, MR12_wmac_leds_gpio,
+				ARRAY_SIZE(MR12_wmac_leds_gpio));
+	ap91_pci_init(art, mac);
+
+    /* SPI Storage */
 	ath79_register_m25p80(NULL);
 
+    /* GPIO */
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR12_leds_gpio),
 					MR12_leds_gpio);
-
 	ath79_register_gpio_keys_polled(-1, MR12_KEYS_POLL_INTERVAL,
 					 ARRAY_SIZE(MR12_gpio_keys),
 					 MR12_gpio_keys);
-
-    ath79_register_pci();
 }
 
 MIPS_MACHINE(ATH79_MACH_MR12, "MR12", "Meraki MR12", MR12_setup);
