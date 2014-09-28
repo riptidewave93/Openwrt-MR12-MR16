@@ -1,8 +1,8 @@
 --- a/arch/mips/ath79/Kconfig
 +++ b/arch/mips/ath79/Kconfig
-@@ -605,6 +605,15 @@
+@@ -462,6 +462,16 @@
+ 	select ATH79_DEV_LEDS_GPIO
  	select ATH79_DEV_M25P80
- 	select ATH79_DEV_WMAC
  
 +config ATH79_MACH_MR12
 +	bool "Meraki MR12 board support"
@@ -12,20 +12,21 @@
 +	select ATH79_DEV_GPIO_BUTTONS
 +	select ATH79_DEV_LEDS_GPIO
 +	select ATH79_DEV_M25P80
++	select ATH79_DEV_WMAC
 +
- config ATH79_MACH_MR600
- 	bool "OpenMesh MR600 board support"
- 	select SOC_AR934X
+ config ATH79_MACH_RB4XX
+ 	bool "MikroTik RouterBOARD 4xx series support"
+ 	select SOC_AR71XX
 --- a/arch/mips/ath79/machtypes.h
 +++ b/arch/mips/ath79/machtypes.h
-@@ -64,6 +64,7 @@
+@@ -63,6 +63,7 @@
+ 	ATH79_MACH_JA76PF2,		/* jjPlus JA76PF2 */
  	ATH79_MACH_JWAP003,		/* jjPlus JWAP003 */
  	ATH79_MACH_HORNET_UB,		/* ALFA Networks Hornet-UB */
- 	ATH79_MACH_MR600V2,		/* OpenMesh MR600v2 */
 +	ATH79_MACH_MR12,		/* Cisco Meraki MR12 */
+ 	ATH79_MACH_MR600V2,		/* OpenMesh MR600v2 */
  	ATH79_MACH_MR600,		/* OpenMesh MR600 */
  	ATH79_MACH_MYNET_N600,		/* WD My Net N600 */
- 	ATH79_MACH_MYNET_N750,		/* WD My Net N750 */
 --- a/arch/mips/ath79/Makefile
 +++ b/arch/mips/ath79/Makefile
 @@ -73,6 +73,7 @@

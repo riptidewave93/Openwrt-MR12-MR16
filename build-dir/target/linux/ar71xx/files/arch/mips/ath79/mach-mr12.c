@@ -125,8 +125,8 @@ static void __init MR12_setup(void)
 	ath79_register_eth(1);
 
     /* Wi-Fi Int */
-	ap9x_pci_setup_wmac_led_pin(0, MR12_GPIO_LED_W1_GREEN);
-	ap9x_pci_setup_wmac_leds(0, MR12_wmac_leds_gpio,
+	ap9x_pci_setup_wmac_led_pin(1, MR12_GPIO_LED_W1_GREEN);
+	ap9x_pci_setup_wmac_leds(1, MR12_wmac_leds_gpio,
 				ARRAY_SIZE(MR12_wmac_leds_gpio));
 	ap91_pci_init(art, mac);
 
