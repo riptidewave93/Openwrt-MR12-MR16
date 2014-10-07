@@ -19,8 +19,7 @@ tftpboot 0x81000000 openwrt-ar71xx-generic-mr12-initramfs-uImage.bin; bootm
 To Do
 -----
 * Bring up the 2nd NIC (Missing PHY?)
-* Bring up the Wi-Fi (PCI init issue?)
-* Use Proper NIC MAC Addresses
+* Use Proper NIC MAC Addresses (We are using the proper location, but Cisco has some custom loader I believe)
 * Fix Reset button GPIO (Is it even GPIO?)
 * enable sysupgrade
 * Possibly more?

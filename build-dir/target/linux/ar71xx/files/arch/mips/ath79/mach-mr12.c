@@ -17,11 +17,10 @@
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 
-#include <asm/mach-ath79/ar71xx_regs.h>
 #include <asm/mach-ath79/ath79.h>
 
-#include "dev-eth.h"
 #include "dev-ap9x-pci.h"
+#include "dev-eth.h"
 #include "dev-gpio-buttons.h"
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
@@ -48,6 +47,10 @@
 /* NIC info */
 #define MR12_WAN_PHYMASK    BIT(4)
 #define MR12_LAN_PHYMASK    BIT(5) // not correct
+
+/* WIFI info */
+#define MR12_WMAC0_MAC_OFFSET           0x120c
+#define MR12_CALDATA0_OFFSET            0x1000
 
 /*
  * MR12 has 7 LED's on the front. 14-11 are for the Wi-Fi reception,
@@ -102,19 +105,18 @@ static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 
 static void __init MR12_setup(void)
 {
-    u8 *mac = (u8 *) KSEG1ADDR(0x18000000); // not correct, does not find WLAN
-    u8 *art = (u8 *) KSEG1ADDR(0x1fff0000); // not correct, does not give proper MAC
-
+    u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
+    
     /* Bring up MDIO */ 
     ath79_register_mdio(0, ~(MR12_WAN_PHYMASK | MR12_LAN_PHYMASK));
 
     /* 1GB POE Port */
-	ath79_init_mac(ath79_eth0_data.mac_addr, art, 0);
+	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
 
     /* 100MB Opt Port */
-	ath79_init_mac(ath79_eth1_data.mac_addr, art, 1);
+	ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
 	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
 	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed
 	ath79_eth1_data.speed = SPEED_100;
@@ -125,10 +127,11 @@ static void __init MR12_setup(void)
 	ath79_register_eth(1);
 
     /* Wi-Fi Int */
-	ap9x_pci_setup_wmac_led_pin(1, MR12_GPIO_LED_W1_GREEN);
-	ap9x_pci_setup_wmac_leds(1, MR12_wmac_leds_gpio,
+	ap9x_pci_setup_wmac_led_pin(0, MR12_GPIO_LED_W1_GREEN);
+	ap9x_pci_setup_wmac_leds(0, MR12_wmac_leds_gpio,
 				ARRAY_SIZE(MR12_wmac_leds_gpio));
-	ap91_pci_init(art, mac);
+    ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
+                mac + MR12_WMAC0_MAC_OFFSET);
 
     /* SPI Storage */
 	ath79_register_m25p80(NULL);
