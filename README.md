@@ -19,7 +19,6 @@ tftpboot 0x81000000 openwrt-ar71xx-generic-mr12-initramfs-uImage.bin; bootm
 To Do
 -----
 * Bring up the 2nd NIC (Not on SPI?)
-* Use Proper NIC MAC Addresses (We are at the right addr, but does not match MAC on device)
 * Test Sysupgrade/Flashable Images
 * Possibly More?
 
