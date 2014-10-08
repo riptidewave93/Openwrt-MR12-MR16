@@ -95,7 +95,7 @@ get_status_led() {
 		status_led="ubnt:green:d22"
 		;;
 	mr12)
-		status_led="mr12:orange:power"
+		status_led="mr12:green:power"
 		;;
 	mr600)
 		status_led="mr600:orange:power"

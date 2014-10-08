@@ -27,10 +27,10 @@
 #include "machtypes.h"
 
 /* Wi-Fi Signal LED's */
-#define MR12_GPIO_LED_W4_GREEN		11
-#define MR12_GPIO_LED_W3_GREEN		12
-#define MR12_GPIO_LED_W2_GREEN		13
-#define MR12_GPIO_LED_W1_GREEN		14
+#define MR12_GPIO_LED_W4_GREEN		14
+#define MR12_GPIO_LED_W3_GREEN		13
+#define MR12_GPIO_LED_W2_GREEN		12
+#define MR12_GPIO_LED_W1_GREEN		11
 
 /* WAN Link LED */
 #define MR12_GPIO_LED_WAN		15
@@ -40,13 +40,13 @@
 #define MR12_GPIO_LED_POWER_GREEN		17
 
 /* Reset button */
-#define MR12_GPIO_BTN_RESET		1   // not correct
+#define MR12_GPIO_BTN_RESET		8
 #define MR12_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR12_KEYS_DEBOUNCE_INTERVAL	(3 * MR12_KEYS_POLL_INTERVAL)
 
 /* NIC info */
 #define MR12_WAN_PHYMASK    BIT(4)
-#define MR12_LAN_PHYMASK    BIT(5) // not correct
+#define MR12_LAN_PHYMASK    BIT(0) // not correct
 
 /* WIFI info */
 #define MR12_WMAC0_MAC_OFFSET           0x120c
@@ -69,11 +69,7 @@ static struct gpio_led MR12_leds_gpio[] __initdata = {
 		.name		= "mr12:green:power",
 		.gpio		= MR12_GPIO_LED_POWER_GREEN,
 		.active_low	= 1,
-	} 
-};
-
-static struct gpio_led MR12_wmac_leds_gpio[] = {
-	{
+	}, {
 		.name		= "mr12:green:wifi4",
 		.gpio		= MR12_GPIO_LED_W4_GREEN,
 		.active_low	= 1,
@@ -92,6 +88,9 @@ static struct gpio_led MR12_wmac_leds_gpio[] = {
 	}
 };
 
+/*
+ * MR12 has 1 Reset button on the bottom mapped to GPIO 8
+ */
 static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 	{
 		.desc		= "reset",
@@ -122,16 +121,9 @@ static void __init MR12_setup(void)
 	ath79_eth1_data.speed = SPEED_100;
 	ath79_eth1_data.duplex = DUPLEX_FULL;
 
-    /* Bringup eth int's */
+    /* Bringup eth ints */
    	ath79_register_eth(0);
 	ath79_register_eth(1);
-
-    /* Wi-Fi Int */
-	ap9x_pci_setup_wmac_led_pin(0, MR12_GPIO_LED_W1_GREEN);
-	ap9x_pci_setup_wmac_leds(0, MR12_wmac_leds_gpio,
-				ARRAY_SIZE(MR12_wmac_leds_gpio));
-    ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
-                mac + MR12_WMAC0_MAC_OFFSET);
 
     /* SPI Storage */
 	ath79_register_m25p80(NULL);
@@ -142,6 +134,11 @@ static void __init MR12_setup(void)
 	ath79_register_gpio_keys_polled(-1, MR12_KEYS_POLL_INTERVAL,
 					 ARRAY_SIZE(MR12_gpio_keys),
 					 MR12_gpio_keys);
+
+    /* Wi-Fi Int */
+    ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
+                mac + MR12_WMAC0_MAC_OFFSET);
+
 }
 
 MIPS_MACHINE(ATH79_MACH_MR12, "MR12", "Meraki MR12", MR12_setup);
