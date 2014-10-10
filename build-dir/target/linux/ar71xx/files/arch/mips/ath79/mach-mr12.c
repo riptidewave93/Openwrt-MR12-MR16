@@ -102,6 +102,7 @@ static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 	}
 };
 
+
 static void __init MR12_setup(void)
 {
     u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
@@ -114,7 +115,10 @@ static void __init MR12_setup(void)
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
 
-    /* 100MB Opt Port */
+    /* 
+     * 100MB Opt Port 
+     * This is probably on the S26 internal switch
+     */
 	ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
 	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
 	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed

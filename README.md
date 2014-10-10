@@ -6,7 +6,7 @@ Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r42690. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r42865. May or may not work on newer revisions.
 
 Building
 --------
@@ -20,7 +20,6 @@ To Do
 -----
 * Bring up the 2nd NIC (Not on SPI?)
 * Test Sysupgrade/Flashable Images
-* Possibly More?
 
 Notice
 ------
