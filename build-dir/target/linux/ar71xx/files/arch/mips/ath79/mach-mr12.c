@@ -46,7 +46,7 @@
 
 /* NIC info */
 #define MR12_WAN_PHYMASK    BIT(4)
-#define MR12_LAN_PHYMASK    BIT(0) // not correct
+#define MR12_LAN_PHYMASK	BIT(0) // not correct
 
 /* WIFI info */
 #define MR12_WMAC0_MAC_OFFSET           0x120c
@@ -108,26 +108,23 @@ static void __init MR12_setup(void)
     u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
     
     /* Bring up MDIO */ 
-    ath79_register_mdio(0, ~(MR12_WAN_PHYMASK | MR12_LAN_PHYMASK));
+    ath79_register_mdio(0,0x0);
 
     /* 1GB POE Port */
 	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
 
-    /* 
-     * 100MB Opt Port 
-     * This is probably on the S26 internal switch
-     */
-	ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
-	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
+    /* 100MB Opt Port */
+	//ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
+	//ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
 	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed
-	ath79_eth1_data.speed = SPEED_100;
-	ath79_eth1_data.duplex = DUPLEX_FULL;
+	//ath79_eth1_data.speed = SPEED_100;
+	//ath79_eth1_data.duplex = DUPLEX_FULL;
 
     /* Bringup eth ints */
    	ath79_register_eth(0);
-	ath79_register_eth(1);
+	//ath79_register_eth(1);
 
     /* SPI Storage */
 	ath79_register_m25p80(NULL);
