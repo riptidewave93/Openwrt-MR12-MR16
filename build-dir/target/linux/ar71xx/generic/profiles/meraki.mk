@@ -7,7 +7,7 @@
 
 define Profile/MR12
 	NAME:=Meraki MR12
-	PACKAGES:=kmod-spi-gpio
+	PACKAGES:=kmod-spi-gpio kmod-ath9k
 endef
 
 define Profile/MR12/description

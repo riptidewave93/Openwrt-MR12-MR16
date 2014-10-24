@@ -155,6 +155,7 @@ platform_check_image() {
 	ap96 | \
 	db120 | \
 	hornet-ub | \
+	mr12 | \
 	bxu2000n-2-a1 | \
 	zcn-1523h-2 | \
 	zcn-1523h-5)
@@ -200,6 +201,7 @@ platform_check_image() {
 	wzr-hp-g300nh | \
 	wzr-hp-g450h | \
 	wzr-hp-ag300h | \
+	wzr-450hp2 | \
 	whr-g301n | \
 	whr-hp-g300n | \
 	whr-hp-gn | \
