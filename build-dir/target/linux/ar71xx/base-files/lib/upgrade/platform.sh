@@ -155,7 +155,7 @@ platform_check_image() {
 	ap96 | \
 	db120 | \
 	hornet-ub | \
-	mr12 | \	
+	mr12 | \
 	bxu2000n-2-a1 | \
 	zcn-1523h-2 | \
 	zcn-1523h-5)
