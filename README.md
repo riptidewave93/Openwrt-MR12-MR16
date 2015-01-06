@@ -1,12 +1,12 @@
 Openwrt-MR12
 ============
 
-Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies
+Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies. At this point, I would consider this as stable as it can get until someone with more experience comes along to fix the 2nd NIC. I will continue to do random revision updates to this repo as long as it keeps me entertained.
 
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r43347. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r43857. May or may not work on newer revisions.
 
 Building
 --------

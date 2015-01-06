@@ -1,6 +1,6 @@
 --- a/arch/mips/ath79/Kconfig
 +++ b/arch/mips/ath79/Kconfig
-@@ -636,6 +636,16 @@
+@@ -667,6 +667,16 @@
  	select ATH79_DEV_M25P80
  	select ATH79_DEV_WMAC
  
@@ -19,7 +19,7 @@
  	select SOC_AR934X
 --- a/arch/mips/ath79/machtypes.h
 +++ b/arch/mips/ath79/machtypes.h
-@@ -64,6 +64,7 @@
+@@ -67,6 +67,7 @@
  	ATH79_MACH_JA76PF2,		/* jjPlus JA76PF2 */
  	ATH79_MACH_JWAP003,		/* jjPlus JWAP003 */
  	ATH79_MACH_HORNET_UB,		/* ALFA Networks Hornet-UB */
@@ -29,7 +29,7 @@
  	ATH79_MACH_MR900,		/* OpenMesh MR900 */
 --- a/arch/mips/ath79/Makefile
 +++ b/arch/mips/ath79/Makefile
-@@ -74,6 +74,7 @@
+@@ -77,6 +77,7 @@
  obj-$(CONFIG_ATH79_MACH_JA76PF)		+= mach-ja76pf.o
  obj-$(CONFIG_ATH79_MACH_JWAP003)	+= mach-jwap003.o
  obj-$(CONFIG_ATH79_MACH_HORNET_UB)	+= mach-hornet-ub.o
