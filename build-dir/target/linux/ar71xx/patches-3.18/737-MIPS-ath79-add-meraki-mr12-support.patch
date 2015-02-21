@@ -1,6 +1,6 @@
 --- a/arch/mips/ath79/Kconfig
 +++ b/arch/mips/ath79/Kconfig
-@@ -667,6 +667,16 @@
+@@ -677,6 +677,16 @@ config ATH79_MACH_OM5P
  	select ATH79_DEV_M25P80
  	select ATH79_DEV_WMAC
  
@@ -17,23 +17,23 @@
  config ATH79_MACH_MR600
  	bool "OpenMesh MR600 board support"
  	select SOC_AR934X
+--- a/arch/mips/ath79/Makefile
++++ b/arch/mips/ath79/Makefile
+@@ -78,6 +78,7 @@ obj-$(CONFIG_ATH79_MACH_JA76PF)	+
+ obj-$(CONFIG_ATH79_MACH_JWAP003)	+= mach-jwap003.o
+ obj-$(CONFIG_ATH79_MACH_HORNET_UB)	+= mach-hornet-ub.o
+ obj-$(CONFIG_ATH79_MACH_MC_MAC1200R)     += mach-mc-mac1200r.o
++obj-$(CONFIG_ATH79_MACH_MR12)		+= mach-mr12.o
+ obj-$(CONFIG_ATH79_MACH_MR600)		+= mach-mr600.o
+ obj-$(CONFIG_ATH79_MACH_MR900)		+= mach-mr900.o
+ obj-$(CONFIG_ATH79_MACH_MYNET_N600)	+= mach-mynet-n600.o
 --- a/arch/mips/ath79/machtypes.h
 +++ b/arch/mips/ath79/machtypes.h
-@@ -67,6 +67,7 @@
+@@ -69,6 +69,7 @@ enum ath79_mach_type {
  	ATH79_MACH_JA76PF2,		/* jjPlus JA76PF2 */
  	ATH79_MACH_JWAP003,		/* jjPlus JWAP003 */
  	ATH79_MACH_HORNET_UB,		/* ALFA Networks Hornet-UB */
 +	ATH79_MACH_MR12,		/* Cisco Meraki MR12 */
  	ATH79_MACH_MR600V2,		/* OpenMesh MR600v2 */
  	ATH79_MACH_MR600,		/* OpenMesh MR600 */
- 	ATH79_MACH_MR900,		/* OpenMesh MR900 */
---- a/arch/mips/ath79/Makefile
-+++ b/arch/mips/ath79/Makefile
-@@ -77,6 +77,7 @@
- obj-$(CONFIG_ATH79_MACH_JA76PF)		+= mach-ja76pf.o
- obj-$(CONFIG_ATH79_MACH_JWAP003)	+= mach-jwap003.o
- obj-$(CONFIG_ATH79_MACH_HORNET_UB)	+= mach-hornet-ub.o
-+obj-$(CONFIG_ATH79_MACH_MR12)		+= mach-mr12.o
- obj-$(CONFIG_ATH79_MACH_MR600)		+= mach-mr600.o
- obj-$(CONFIG_ATH79_MACH_MR900)		+= mach-mr900.o
- obj-$(CONFIG_ATH79_MACH_MYNET_N600)	+= mach-mynet-n600.o
+ 	ATH79_MACH_MR900,		/* OpenMesh MR900 */ 
