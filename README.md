@@ -6,7 +6,7 @@ Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies. At this 
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r44497. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r44783. May or may not work on newer revisions.
 
 Building
 --------

@@ -1,6 +1,6 @@
 --- a/arch/mips/ath79/Kconfig
 +++ b/arch/mips/ath79/Kconfig
-@@ -677,6 +677,16 @@ config ATH79_MACH_OM5P
+@@ -687,6 +687,16 @@ config ATH79_MACH_OM5P
  	select ATH79_DEV_M25P80
  	select ATH79_DEV_WMAC
  
@@ -29,7 +29,7 @@
  obj-$(CONFIG_ATH79_MACH_MYNET_N600)	+= mach-mynet-n600.o
 --- a/arch/mips/ath79/machtypes.h
 +++ b/arch/mips/ath79/machtypes.h
-@@ -69,6 +69,7 @@ enum ath79_mach_type {
+@@ -67,6 +67,7 @@ enum ath79_mach_type {
  	ATH79_MACH_JA76PF2,		/* jjPlus JA76PF2 */
  	ATH79_MACH_JWAP003,		/* jjPlus JWAP003 */
  	ATH79_MACH_HORNET_UB,		/* ALFA Networks Hornet-UB */
