@@ -1,4 +1,4 @@
-Openwrt-MR12
+Openwrt-MR12/MR16
 ============
 
 Bringup Repo for the Cisco Meraki MR12/MR16 on the latest OpenWRT Nightlies. At this point, I would consider this as stable as it can get until someone with more experience comes along to fix the 2nd NIC. I will continue to do random revision updates to this repo as long as it keeps me entertained.
@@ -14,7 +14,7 @@ git sync, copy files on top of build dir, menuconfig && kernel_menuconfig to mr1
 
 Booting TFTP
 -------
-tftpboot 0x81000000 openwrt-ar71xx-generic-mr1*-initramfs-uImage.bin; bootm
+	tftpboot 0x81000000 openwrt-ar71xx-generic-mr1*-initramfs-uImage.bin; bootm
 
 Flashing System Images
 -------
@@ -27,12 +27,12 @@ In u-boot, run the following commands:
 To Do
 -----
 MR12
-..* Bring up the 2nd NIC (Not on SPI?)
-..* Maybe More?
+  * Bring up the 2nd NIC (Not on SPI?)
+  * Maybe More?
 MR16
-..* Verify Reset Pin GPIO
-..* Verify Working WiFi
---* Test, Test, Test!
+  * Verify Reset Pin GPIO
+  * Verify Working WiFi
+  * Test, Test, Test!
 
 Notice
 ------
