@@ -55,7 +55,7 @@
 
 
 static struct gpio_led MR16_leds_gpio[] __initdata = {
-    {
+	{
 		.name		= "mr16:green:wan",
 		.gpio		= MR16_GPIO_LED_WAN,
 		.active_low	= 1,
@@ -97,26 +97,25 @@ static struct gpio_keys_button MR16_gpio_keys[] __initdata = {
 	}
 };
 
-
 static void __init MR16_setup(void)
 {
-    u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
-    
-    /* Bring up MDIO */ 
-    ath79_register_mdio(0,0x0);
+	u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
+	
+	/* Bring up MDIO */ 
+	ath79_register_mdio(0,0x0);
 
-    /* 1GB POE Port */
-    ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
-    ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
-    ath79_eth0_data.phy_mask = MR16_WAN_PHYMASK;
+	/* 1GB POE Port */
+	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
+	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
+	ath79_eth0_data.phy_mask = MR16_WAN_PHYMASK;
 
-    /* Bringup eth */
-    ath79_register_eth(0);
+	/* Bringup eth */
+	ath79_register_eth(0);
 
-    /* SPI Storage */
-    ath79_register_m25p80(NULL);
+	/* SPI Storage */
+	ath79_register_m25p80(NULL);
 
-    /* GPIO */
+	/* GPIO */
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR16_leds_gpio),
 					MR16_leds_gpio);
 	ath79_register_gpio_keys_polled(-1, MR16_KEYS_POLL_INTERVAL,
@@ -125,10 +124,9 @@ static void __init MR16_setup(void)
 
 	/* Wi-Fi Int */
 	ap94_pci_init(mac + MR16_CALDATA0_OFFSET,
-		      mac + MR16_WMAC0_MAC_OFFSET
-		      mac + MR16_CALDATA1_OFFSET,
-		      mac + MR16_WMAC1_MAC_OFFSET);
-
+		    mac + MR16_WMAC0_MAC_OFFSET,
+		    mac + MR16_CALDATA1_OFFSET,
+		    mac + MR16_WMAC1_MAC_OFFSET);
 }
 
 MIPS_MACHINE(ATH79_MACH_MR16, "MR16", "Meraki MR16", MR16_setup);

@@ -57,7 +57,7 @@
  * 15 for a WAN link, and 16-17 for the power LED (orange and green) 
  */
 static struct gpio_led MR12_leds_gpio[] __initdata = {
-    {
+	{
 		.name		= "mr12:green:wan",
 		.gpio		= MR12_GPIO_LED_WAN,
 		.active_low	= 1,
@@ -102,43 +102,42 @@ static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 	}
 };
 
-
 static void __init MR12_setup(void)
 {
-    u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
-    
-    /* Bring up MDIO */ 
-    ath79_register_mdio(0,0x0);
+	u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
+	
+	/* Bring up MDIO */ 
+	ath79_register_mdio(0,0x0);
 
-    /* 1GB POE Port */
+	/* 1GB POE Port */
 	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
 
-    /* 100MB Opt Port */
+	/* 100MB Opt Port */
 	//ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
 	//ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
 	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed
 	//ath79_eth1_data.speed = SPEED_100;
 	//ath79_eth1_data.duplex = DUPLEX_FULL;
 
-    /* Bringup eth ints */
-   	ath79_register_eth(0);
+	/* Bringup eth ints */
+	ath79_register_eth(0);
 	//ath79_register_eth(1);
 
-    /* SPI Storage */
+	/* SPI Storage */
 	ath79_register_m25p80(NULL);
 
-    /* GPIO */
+	/* GPIO */
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR12_leds_gpio),
 					MR12_leds_gpio);
 	ath79_register_gpio_keys_polled(-1, MR12_KEYS_POLL_INTERVAL,
-					 ARRAY_SIZE(MR12_gpio_keys),
-					 MR12_gpio_keys);
+					ARRAY_SIZE(MR12_gpio_keys),
+					MR12_gpio_keys);
 
-    /* Wi-Fi Int */
-    ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
-                mac + MR12_WMAC0_MAC_OFFSET);
+	/* Wi-Fi Int */
+	ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
+				mac + MR12_WMAC0_MAC_OFFSET);
 
 }
 
