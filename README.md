@@ -26,10 +26,11 @@ In u-boot, run the following commands:
 
 To Do
 -----
-MR12
+##### MR12
   * Bring up the 2nd NIC (Not on SPI?)
   * Maybe More?
-MR16
+  
+##### MR16
   * Verify Reset Pin GPIO
   * Verify Working WiFi
   * Test, Test, Test!
