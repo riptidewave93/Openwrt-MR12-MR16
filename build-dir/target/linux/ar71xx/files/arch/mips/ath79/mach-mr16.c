@@ -42,7 +42,7 @@
 /* Reset button */
 #define MR16_GPIO_BTN_RESET		8	/* Needs Confirmation */
 #define MR16_KEYS_POLL_INTERVAL		20	/* msecs */
-#define MR16_KEYS_DEBOUNCE_INTERVAL	(3 * MR12_KEYS_POLL_INTERVAL)
+#define MR16_KEYS_DEBOUNCE_INTERVAL	(3 * MR16_KEYS_POLL_INTERVAL)
 
 /* NIC info */
 #define MR16_WAN_PHYMASK    BIT(0)
