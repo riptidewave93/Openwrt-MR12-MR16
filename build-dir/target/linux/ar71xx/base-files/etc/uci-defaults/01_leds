@@ -184,6 +184,14 @@ mr12)
 	ucidef_set_led_wlan "wlan4" "WLAN4" "mr12:green:wifi4" "phy0tpt"
 	;;
 
+mr16)
+	ucidef_set_led_netdev "wan" "WAN" "mr16:green:wan" "eth0"
+	ucidef_set_led_wlan "wlan1" "WLAN1" "mr16:green:wifi1" "phy0radio"
+	ucidef_set_led_wlan "wlan2" "WLAN2" "mr16:green:wifi2" "phy0radio"
+	ucidef_set_led_wlan "wlan3" "WLAN3" "mr16:green:wifi3" "phy0radio"
+	ucidef_set_led_wlan "wlan4" "WLAN4" "mr16:green:wifi4" "phy0tpt"
+	;;
+
 mr600)
 	ucidef_set_led_wlan "wlan58" "WLAN58" "mr600:green:wlan58" "phy0tpt"
 	;;
@@ -241,7 +249,8 @@ om2p-lc)
 	ucidef_set_led_netdev "port2" "port2" "om2p:blue:lan" "eth1"
 	;;
 
-om5p)
+om5p | \
+om5p-an)
 	ucidef_set_led_netdev "port1" "port1" "om5p:blue:wan" "eth0"
 	ucidef_set_led_netdev "port2" "port2" "om5p:blue:lan" "eth1"
 	;;

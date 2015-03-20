@@ -111,6 +111,9 @@ get_status_led() {
 	mr12)
 		status_led="mr12:green:power"
 		;;
+	mr16)
+		status_led="mr16:green:power"
+		;;
 	mr600)
 		status_led="mr600:orange:power"
 		;;
@@ -145,7 +148,8 @@ get_status_led() {
 	om2p-lc)
 		status_led="om2p:blue:power"
 		;;
-	om5p)
+	om5p | \
+	om5p-an)
 		status_led="om5p:blue:power"
 		;;
 	pb44)

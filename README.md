@@ -1,35 +1,38 @@
 Openwrt-MR12
 ============
 
-Bringup Repo for the Cisco Meraki MR12 on the latest OpenWRT Nightlies. At this point, I would consider this as stable as it can get until someone with more experience comes along to fix the 2nd NIC. I will continue to do random revision updates to this repo as long as it keeps me entertained.
+Bringup Repo for the Cisco Meraki MR12/MR16 on the latest OpenWRT Nightlies. At this point, I would consider this as stable as it can get until someone with more experience comes along to fix the 2nd NIC. I will continue to do random revision updates to this repo as long as it keeps me entertained.
 
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r44783. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r44908. May or may not work on newer revisions.
 
 Building
 --------
-git sync, copy files on top of build dir, menuconfig && kernel_menuconfig to mr12, build, and enjoy
+git sync, copy files on top of build dir, menuconfig && kernel_menuconfig to mr12 or mr16, build, and enjoy
 
 Booting TFTP
 -------
-tftpboot 0x81000000 openwrt-ar71xx-generic-mr12-initramfs-uImage.bin; bootm
+tftpboot 0x81000000 openwrt-ar71xx-generic-mr1*-initramfs-uImage.bin; bootm
 
 Flashing System Images
 -------
 In u-boot, run the following commands:
 
-1. tftpboot 0x80010000 openwrt-ar71xx-generic-mr12-kernel.bin;erase 0x9fda0000 +0x240000;cp.b 0x80010000 0x9fda0000 0x240000
-
-2. tftpboot 0x80010000 openwrt-ar71xx-generic-mr12-rootfs-squashfs.bin;erase 0x9f080000 +0xD20000;cp.b 0x80010000 0x9f080000 0xD20000
-
-3. setenv bootcmd bootm 0x9fda0000; saveenv; boot
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr1*-kernel.bin;erase 0x9fda0000 +0x240000;cp.b 0x80010000 0x9fda0000 0x240000
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr1*-rootfs-squashfs.bin;erase 0x9f080000 +0xD20000;cp.b 0x80010000 0x9f080000 0xD20000
+	setenv bootcmd bootm 0x9fda0000; saveenv; boot
 
 To Do
 -----
-* Bring up the 2nd NIC (Not on SPI?)
-* Maybe More?
+MR12
+..* Bring up the 2nd NIC (Not on SPI?)
+..* Maybe More?
+MR16
+..* Verify Reset Pin GPIO
+..* Verify Working WiFi
+--* Test, Test, Test!
 
 Notice
 ------

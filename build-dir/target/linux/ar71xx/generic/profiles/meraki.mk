@@ -14,4 +14,14 @@ define Profile/MR12/description
 	Package set optimized for the Cisco Meraki MR12 Access Point.
 endef
 
+define Profile/MR16
+	NAME:=Meraki MR16
+	PACKAGES:=kmod-spi-gpio kmod-ath9k
+endef
+
+define Profile/MR16/description
+	Package set optimized for the Cisco Meraki MR16 Access Point.
+endef
+
 $(eval $(call Profile,MR12))
+$(eval $(call Profile,MR16))
