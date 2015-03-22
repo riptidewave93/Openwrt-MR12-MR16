@@ -1,7 +1,7 @@
 /*
  *  Cisco Meraki MR12 board support
  *
- *  Copyright (C) 2014 Chris Blake <chrisrblake93@gmail.com>
+ *  Copyright (C) 2014-2015 Chris Blake <chrisrblake93@gmail.com>
  *
  *  Based on Atheros AP96 board support configuration
  *
@@ -26,7 +26,7 @@
 #include "dev-m25p80.h"
 #include "machtypes.h"
 
-/* Wi-Fi Signal LED's */
+/* Wi-Fi Signal LEDs */
 #define MR12_GPIO_LED_W4_GREEN		14
 #define MR12_GPIO_LED_W3_GREEN		13
 #define MR12_GPIO_LED_W2_GREEN		12
@@ -35,7 +35,7 @@
 /* WAN Link LED */
 #define MR12_GPIO_LED_WAN		15
 
-/* Power LED */
+/* Power LEDs */
 #define MR12_GPIO_LED_POWER_ORANGE		16
 #define MR12_GPIO_LED_POWER_GREEN		17
 
@@ -44,18 +44,14 @@
 #define MR12_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR12_KEYS_DEBOUNCE_INTERVAL	(3 * MR12_KEYS_POLL_INTERVAL)
 
-/* NIC info */
+/* NIC PHYs */
 #define MR12_WAN_PHYMASK    BIT(4)
 #define MR12_LAN_PHYMASK	BIT(0) // not correct
 
-/* WIFI info */
+/* WIFI/MAC offset */
 #define MR12_WMAC0_MAC_OFFSET           0x120c
 #define MR12_CALDATA0_OFFSET            0x1000
 
-/*
- * MR12 has 7 LED's on the front. 14-11 are for the Wi-Fi reception,
- * 15 for a WAN link, and 16-17 for the power LED (orange and green) 
- */
 static struct gpio_led MR12_leds_gpio[] __initdata = {
 	{
 		.name		= "mr12:green:wan",
@@ -88,9 +84,6 @@ static struct gpio_led MR12_leds_gpio[] __initdata = {
 	}
 };
 
-/*
- * MR12 has 1 Reset button on the bottom mapped to GPIO 8
- */
 static struct gpio_keys_button MR12_gpio_keys[] __initdata = {
 	{
 		.desc		= "reset",

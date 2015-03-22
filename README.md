@@ -1,12 +1,13 @@
 Openwrt-MR12/MR16
 ============
 
-Bringup Repo for the Cisco Meraki MR12/MR16 on the latest OpenWRT Nightlies. At this point, I would consider this as stable as it can get until someone with more experience comes along to fix the 2nd NIC. I will continue to do random revision updates to this repo as long as it keeps me entertained.
+Bringup Repo for the Cisco Meraki MR12/MR16 on the latest OpenWRT Nightlies. 
 
+I will continue to do random updates/upgrades/release on this repo as long as it keeps me entertained. Forks/Pull Requests are welcome!
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r44908. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r44943. May or may not work on newer revisions.
 
 Building
 --------
@@ -31,9 +32,7 @@ To Do
   * Maybe More?
   
 ##### MR16
-  * Verify Reset Pin GPIO
-  * Verify Working WiFi
-  * Test, Test, Test!
+  * Maybe More?
 
 Notice
 ------

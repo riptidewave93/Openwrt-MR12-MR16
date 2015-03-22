@@ -178,17 +178,17 @@ mc-mac1200r)
 
 mr12)
 	ucidef_set_led_netdev "wan" "WAN" "mr12:green:wan" "eth0"
-	ucidef_set_led_wlan "wlan1" "WLAN1" "mr12:green:wifi1" "phy0radio"
-	ucidef_set_led_wlan "wlan2" "WLAN2" "mr12:green:wifi2" "phy0radio"
-	ucidef_set_led_wlan "wlan3" "WLAN3" "mr12:green:wifi3" "phy0radio"
+	ucidef_set_led_wlan "wlan1" "WLAN1" "mr12:green:wifi1" "phy0assoc"
+	ucidef_set_led_wlan "wlan2" "WLAN2" "mr12:green:wifi2" "phy0assoc"
+	ucidef_set_led_wlan "wlan3" "WLAN3" "mr12:green:wifi3" "phy0assoc"
 	ucidef_set_led_wlan "wlan4" "WLAN4" "mr12:green:wifi4" "phy0tpt"
 	;;
 
 mr16)
 	ucidef_set_led_netdev "wan" "WAN" "mr16:green:wan" "eth0"
-	ucidef_set_led_wlan "wlan1" "WLAN1" "mr16:green:wifi1" "phy0radio"
-	ucidef_set_led_wlan "wlan2" "WLAN2" "mr16:green:wifi2" "phy0radio"
-	ucidef_set_led_wlan "wlan3" "WLAN3" "mr16:green:wifi3" "phy0radio"
+	ucidef_set_led_wlan "wlan1" "WLAN1" "mr16:green:wifi1" "phy0assoc"
+	ucidef_set_led_wlan "wlan2" "WLAN2" "mr16:green:wifi2" "phy0assoc"
+	ucidef_set_led_wlan "wlan3" "WLAN3" "mr16:green:wifi3" "phy0assoc"
 	ucidef_set_led_wlan "wlan4" "WLAN4" "mr16:green:wifi4" "phy0tpt"
 	;;
 

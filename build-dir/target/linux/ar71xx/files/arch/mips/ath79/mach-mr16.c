@@ -40,7 +40,7 @@
 #define MR16_GPIO_LED_POWER_GREEN		6
 
 /* Reset button */
-#define MR16_GPIO_BTN_RESET		8	/* Needs Confirmation */
+#define MR16_GPIO_BTN_RESET		7
 #define MR16_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR16_KEYS_DEBOUNCE_INTERVAL	(3 * MR16_KEYS_POLL_INTERVAL)
 
