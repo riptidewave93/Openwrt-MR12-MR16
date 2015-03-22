@@ -16,7 +16,7 @@
 +
 +config ATH79_MACH_MR16
 +	bool "Meraki MR16 board support"
-+	select SOC_AR724X
++	select SOC_AR71XX
 +	select ATH79_DEV_AP9X_PCI if PCI
 +	select ATH79_DEV_ETH
 +	select ATH79_DEV_GPIO_BUTTONS
