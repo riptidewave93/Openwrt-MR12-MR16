@@ -19,12 +19,18 @@ Booting TFTP
 
 Flashing System Images
 -------
-In u-boot, run the following commands:
+For the MR12 In uboot, run the following commands:
 
-	tftpboot 0x80010000 openwrt-ar71xx-generic-mr1*-kernel.bin;erase 0x9fda0000 +0x240000;cp.b 0x80010000 0x9fda0000 0x240000
-	tftpboot 0x80010000 openwrt-ar71xx-generic-mr1*-rootfs-squashfs.bin;erase 0x9f080000 +0xD20000;cp.b 0x80010000 0x9f080000 0xD20000
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr12-kernel.bin;erase 0x9fda0000 +0x240000;cp.b 0x80010000 0x9fda0000 0x240000
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr12-rootfs-squashfs.bin;erase 0x9f080000 +0xD20000;cp.b 0x80010000 0x9f080000 0xD20000
 	setenv bootcmd bootm 0x9fda0000; saveenv; boot
 
+For the MR16 In uboot, run the following commands:
+
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr16-kernel.bin;erase 0xbfda0000 +0x240000;cp.b 0x80010000 0xbfda0000 0x240000
+	tftpboot 0x80010000 openwrt-ar71xx-generic-mr16-rootfs-squashfs.bin;erase 0xbf080000 +0xD20000;cp.b 0x80010000 0xbf080000 0xD20000
+	setenv bootcmd bootm 0xbfda0000; saveenv; boot
+	
 To Do
 -----
 ##### MR12
