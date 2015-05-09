@@ -7,7 +7,7 @@ I will continue to do random updates/upgrades/releases on this repo as long as i
 
 About
 -----
-Based on OpenWRT CHAOS CALMER r45397. May or may not work on newer revisions.
+Based on OpenWRT CHAOS CALMER r45651. May or may not work on newer revisions.
 
 Building
 --------

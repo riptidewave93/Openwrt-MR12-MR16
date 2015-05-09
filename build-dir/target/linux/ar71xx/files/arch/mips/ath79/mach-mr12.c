@@ -26,29 +26,22 @@
 #include "dev-m25p80.h"
 #include "machtypes.h"
 
-/* Wi-Fi Signal LEDs */
 #define MR12_GPIO_LED_W4_GREEN		14
 #define MR12_GPIO_LED_W3_GREEN		13
 #define MR12_GPIO_LED_W2_GREEN		12
 #define MR12_GPIO_LED_W1_GREEN		11
 
-/* WAN Link LED */
 #define MR12_GPIO_LED_WAN		15
 
-/* Power LEDs */
 #define MR12_GPIO_LED_POWER_ORANGE		16
 #define MR12_GPIO_LED_POWER_GREEN		17
 
-/* Reset button */
 #define MR12_GPIO_BTN_RESET		8
 #define MR12_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR12_KEYS_DEBOUNCE_INTERVAL	(3 * MR12_KEYS_POLL_INTERVAL)
 
-/* NIC PHYs */
 #define MR12_WAN_PHYMASK    BIT(4)
-#define MR12_LAN_PHYMASK	BIT(0) // not correct
 
-/* WIFI/MAC offset */
 #define MR12_WMAC0_MAC_OFFSET           0x120c
 #define MR12_CALDATA0_OFFSET            0x1000
 
@@ -99,36 +92,21 @@ static void __init MR12_setup(void)
 {
 	u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
 	
-	/* Bring up MDIO */ 
 	ath79_register_mdio(0,0x0);
 
-	/* 1GB POE Port */
 	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR12_WAN_PHYMASK;
-
-	/* 100MB Opt Port */
-	//ath79_init_mac(ath79_eth1_data.mac_addr, mac, 1);
-	//ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_MII;
-	//ath79_eth1_data.phy_mask = MR12_LAN_PHYMASK; // will not function until fixed
-	//ath79_eth1_data.speed = SPEED_100;
-	//ath79_eth1_data.duplex = DUPLEX_FULL;
-
-	/* Bringup eth ints */
 	ath79_register_eth(0);
-	//ath79_register_eth(1);
 
-	/* SPI Storage */
 	ath79_register_m25p80(NULL);
 
-	/* GPIO */
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR12_leds_gpio),
 					MR12_leds_gpio);
 	ath79_register_gpio_keys_polled(-1, MR12_KEYS_POLL_INTERVAL,
 					ARRAY_SIZE(MR12_gpio_keys),
 					MR12_gpio_keys);
 
-	/* Wi-Fi Int */
 	ap91_pci_init(mac + MR12_CALDATA0_OFFSET,
 				mac + MR12_WMAC0_MAC_OFFSET);
 

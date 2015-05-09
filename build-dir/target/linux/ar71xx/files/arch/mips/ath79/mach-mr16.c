@@ -26,33 +26,26 @@
 #include "dev-m25p80.h"
 #include "machtypes.h"
 
-/* Wi-Fi Signal LED's */
 #define MR16_GPIO_LED_W4_GREEN		3
 #define MR16_GPIO_LED_W3_GREEN		2
 #define MR16_GPIO_LED_W2_GREEN		1
 #define MR16_GPIO_LED_W1_GREEN		0
 
-/* WAN Link LED */
 #define MR16_GPIO_LED_WAN		4
 
-/* Power LED */
 #define MR16_GPIO_LED_POWER_ORANGE		5
 #define MR16_GPIO_LED_POWER_GREEN		6
 
-/* Reset button */
 #define MR16_GPIO_BTN_RESET		7
 #define MR16_KEYS_POLL_INTERVAL		20	/* msecs */
 #define MR16_KEYS_DEBOUNCE_INTERVAL	(3 * MR16_KEYS_POLL_INTERVAL)
 
-/* NIC info */
 #define MR16_WAN_PHYMASK    BIT(0)
 
-/* WIFI info */
 #define MR16_WMAC0_MAC_OFFSET		0x120c
 #define MR16_WMAC1_MAC_OFFSET		0x520c
 #define MR16_CALDATA0_OFFSET		0x1000
 #define MR16_CALDATA1_OFFSET		0x5000
-
 
 static struct gpio_led MR16_leds_gpio[] __initdata = {
 	{
@@ -101,28 +94,21 @@ static void __init MR16_setup(void)
 {
 	u8 *mac = (u8 *) KSEG1ADDR(0xbfff0000);
 	
-	/* Bring up MDIO */ 
 	ath79_register_mdio(0,0x0);
 
-	/* 1GB POE Port */
 	ath79_init_mac(ath79_eth0_data.mac_addr, mac, 0);
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
 	ath79_eth0_data.phy_mask = MR16_WAN_PHYMASK;
-
-	/* Bringup eth */
 	ath79_register_eth(0);
 
-	/* SPI Storage */
 	ath79_register_m25p80(NULL);
 
-	/* GPIO */
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(MR16_leds_gpio),
 					MR16_leds_gpio);
 	ath79_register_gpio_keys_polled(-1, MR16_KEYS_POLL_INTERVAL,
 					ARRAY_SIZE(MR16_gpio_keys),
 					MR16_gpio_keys);
 
-	/* Wi-Fi Int */
 	ap94_pci_init(mac + MR16_CALDATA0_OFFSET,
 		    mac + MR16_WMAC0_MAC_OFFSET,
 		    mac + MR16_CALDATA1_OFFSET,

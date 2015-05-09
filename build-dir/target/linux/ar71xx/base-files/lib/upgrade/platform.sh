@@ -226,9 +226,11 @@ platform_check_image() {
 	loco-m-xw | \
 	nanostation-m | \
 	rocket-m | \
+	rocket-m-xw | \
 	nanostation-m-xw | \
 	rw2458n | \
 	wndap360 | \
+	wpj344 | \
 	wzr-hp-g300nh2 | \
 	wzr-hp-g300nh | \
 	wzr-hp-g450h | \
