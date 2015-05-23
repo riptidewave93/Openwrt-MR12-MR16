@@ -1,3 +1,5 @@
+**NOTE: This repo is NO LONGER MAINTAINED as these changes were applied upstream. Refer to http://git.openwrt.org/?p=openwrt.git;a=commit;h=acdf1a2592a14e11aab99996133c836dbef1f92a and enjoy the official nightles!** 
+
 Openwrt-MR12/MR16
 ============
 
