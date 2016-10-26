@@ -35,6 +35,35 @@ In uboot, run the following commands:
 	tftpboot 0x80010000 openwrt-ar71xx-generic-mr16-rootfs-squashfs.bin;erase 0xbf080000 +0xD20000;cp.b 0x80010000 0xbf080000 0xD20000
 	setenv bootcmd bootm 0xbfda0000; saveenv; boot
 	
+#### LEDE - Setting hardware MAC Address
+Note that as of 2016-10-26, users of LEDE on the MR12 and MR16 can now properly set their hardware MAC address to prevent MAC conflicts, or needing to set this with every reset. To verify if your installed firmware supports this, run `cat /proc/mtd` and if you see a "mac" partition like the example below, you can then follow the below steps to set your MAC address.
+
+```
+root@lede:~# cat /proc/mtd | grep mac
+mtd5: 00010000 00010000 "mac"
+```
+
+If you see the "mac" partition like the above example you can continue, otherwise the following process will not work and MAY BE DAMAGING to your device.
+
+To set your MAC, do the following.
+
+  1. Get your MAC from the bottom of the device. In this example, we use 00:18:0a:33:44:55
+  2. Convert your mac to somthing we can use with hex & echo. SO with the above mac, we would change it to:
+  
+  ```
+  \x00\x18\x0a\x33\x44\x55
+  ```
+  
+  3. With this, we can now erase our mac partition and set the MAC address using the following commands:
+  
+  ```
+  mtd erase mac
+  echo -n -e '\x00\x18\x0a\x33\x44\x55' > /dev/mtd5
+  sync && reboot
+  ```
+
+  4. Once done your board will reboot, and should have the correct MAC set on the eth and wireless interfaces.
+  
 To Do
 -----
 ##### MR12
